@@ -137,5 +137,6 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-#PyCharm folder
+# PyCharm folder
 .idea/
+/py_christmas/py_christmas/settings.py
