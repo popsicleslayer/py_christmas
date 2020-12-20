@@ -10,3 +10,7 @@ class MainPage(View):
     #
     def get(self, request):
         return render(request,'index.html')
+
+class Place(View):
+    def __str__(self):
+        return Place.objects.values_list('short_description')
