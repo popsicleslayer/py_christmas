@@ -14,3 +14,7 @@ class MainPage(View):
 class Place(View):
     def __str__(self):
         return Place.objects.values_list('short_description')
+
+class Way(View):
+    def __str__(self):
+        return Way.objects.values_list('short_description')
