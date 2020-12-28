@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from game_app.views import (
     MainPage,
+    GoToPlace_view,
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPage.as_view(), name='main_page'),
+    path('go/<int:id>/', GoToPlace_view.as_view(), name='go_to_id'),
 ]

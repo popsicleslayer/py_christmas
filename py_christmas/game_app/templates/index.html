@@ -7,8 +7,18 @@
     <title>Gra paragraf</title>
   </head>
   <body>
-    <h1>Gra</h1>
+    <h1>A game</h1>
     <h3>Version 1.0, author: popsicleslayer</h3>
-
+    {{ place.description }}
+    <ul>
+    {% for way in ways %}
+    <form action="/go/{{ way.id }}/" method="post">
+    <li>{{ way.description }}</li>
+    <input type="submit" value="Go">
+    </form>
+    {% empty %}
+    <li>No further ways</li>
+    {% endfor %}
+    </ul>
   </body>
 </html>
