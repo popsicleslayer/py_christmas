@@ -21,12 +21,12 @@
         <br>
         <span class="cost">-{{way.cost}} gold</span>
       {% else %}
-        <input type="submit" name="cost" value="Go">
+        <input type="submit" value="Go">
         <br>
         <span class="cost">-{{way.cost}} gold</span>
       {% endif %}
     {% elif way.gain != 0 %}
-      <input type="submit" name="gain" value="Go">
+      <input type="submit" value="Go">
       <br>
       <span class="gain">+{{way.gain}} gold</span>
     {% else %}
