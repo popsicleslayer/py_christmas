@@ -10,11 +10,28 @@
     <h1>A game</h1>
     <h3>Version 1.0, author: popsicleslayer</h3>
     {{ place.description }}
+    <p>Your current gold {{ money }}</p>
     <ul>
     {% for way in ways %}
     <form action="/go/{{ way.id }}/" method="post">
     <li>{{ way.description }}</li>
-    <input type="submit" value="Go">
+    {% if way.cost != 0 %}
+      {% if way.cost > money %}
+        <input type="submit" value="Go" disabled>
+        <br>
+        <span class="cost">-{{way.cost}} gold</span>
+      {% else %}
+        <input type="submit" name="cost" value="Go">
+        <br>
+        <span class="cost">-{{way.cost}} gold</span>
+      {% endif %}
+    {% elif way.gain != 0 %}
+      <input type="submit" name="gain" value="Go">
+      <br>
+      <span class="gain">+{{way.gain}} gold</span>
+    {% else %}
+      <input type="submit" value="Go">
+    {% endif %}
     </form>
     {% empty %}
     <li>No further ways</li>

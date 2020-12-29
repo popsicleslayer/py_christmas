@@ -12,17 +12,19 @@ class MainPage(View):
     #
     def get(self, request):
         try:
-            current_place_id = request.session['current_place']
-            money = request.session['money']
+            current_place_session = request.session['current_place']
+            money_session = request.session['money']
         except:
             place_id = Place.objects.order_by('pk').first()
             request.session['current_place'] = place_id.id
             request.session['money'] = 0
         current_place = Place.objects.get(pk = request.session.get('current_place'))
         outgoing_ways = current_place.outgoing_ways.all()
+        players_money = request.session['money']
         context = {
             'place': current_place,
-            'ways' : outgoing_ways
+            'ways' : outgoing_ways,
+            'money' : players_money
         }
         return render(request,'index.html', context)
 
@@ -43,4 +45,6 @@ class GoToPlace_view(View):
         for way in place.outgoing_ways.all():
             if way_id == way.pk:
                 request.session['current_place'] = way.destination.pk
+                request.session['money'] -= way.cost
+                request.session['money'] += way.gain
         return redirect('main_page')
