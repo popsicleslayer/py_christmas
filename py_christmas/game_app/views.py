@@ -13,9 +13,11 @@ class MainPage(View):
     def get(self, request):
         try:
             current_place_id = request.session['current_place']
+            money = request.session['money']
         except:
             place_id = Place.objects.order_by('pk').first()
             request.session['current_place'] = place_id.id
+            request.session['money'] = 0
         current_place = Place.objects.get(pk = request.session.get('current_place'))
         outgoing_ways = current_place.outgoing_ways.all()
         context = {
