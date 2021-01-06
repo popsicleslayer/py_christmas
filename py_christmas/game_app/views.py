@@ -9,8 +9,14 @@ class MainPage(View):
     """
     Main page view
     """
-    #
+
     def get(self, request):
+        """
+        Checks if there are current_place and money set in session.
+        If not sets it to be the first record in Place database as 'current_place'
+        and money to starting value (0) as 'money' in session.
+        Checks if there's a colour mode selected or if there's a cookie 'interface' with selected mode in it.
+        """
         try:
             current_place_session = request.session['current_place']
             money_session = request.session['money']
@@ -26,7 +32,25 @@ class MainPage(View):
             'ways' : outgoing_ways,
             'money' : players_money
         }
-        return render(request,'index.html', context)
+        # Colour mode verification
+        if request.GET.get('mode'):
+            mode = request.GET.get('mode')
+            context['mode'] = mode
+        elif 'interface' in request.COOKIES:
+            mode = request.COOKIES['interface']
+            context['mode'] = mode
+        else:
+            context['mode'] = 'light'
+
+        response = render(request,'index.html', context)
+
+        # Setting interface cookie
+        if request.GET.get('mode'):
+            mode = request.GET.get('mode')
+            response.set_cookie('interface', mode)
+
+        return response
+
 
 class Place_view(View):
     def __str__(self):

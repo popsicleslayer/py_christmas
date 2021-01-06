@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/static/style.css">
     <title>Gra paragraf</title>
   </head>
-  <body>
+  <body class="{{ mode }}">
     <h1>A game</h1>
     <h3>Version 1.0, author: popsicleslayer</h3>
     {{ place.description }}
@@ -37,5 +37,7 @@
     <li>No further ways</li>
     {% endfor %}
     </ul>
+    <a href="/?mode=light">Light mode</a>
+    <a href="/?mode=dark">Dark mode</a>
   </body>
 </html>
