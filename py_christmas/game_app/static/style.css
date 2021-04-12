@@ -1,3 +1,16 @@
-body {
-  background: #C5CEF5 none no-repeat scroll 0 0;
+input.new-family-member {
+  width: 100%;
+}
+input[type=submit] {
+  color: purple;
+}
+
+.light{
+  background-color: #591899;
+  color: #4f4e4e;
+}
+
+.dark{
+  background-color: #504655;
+  color: #c1b7c6
 }
